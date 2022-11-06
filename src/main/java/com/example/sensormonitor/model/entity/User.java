@@ -1,6 +1,6 @@
-package com.example.core.entity;
+package com.example.sensormonitor.model.entity;
 
-import com.example.core.entity.enam.UserRole;
+import com.example.sensormonitor.model.entity.enam.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

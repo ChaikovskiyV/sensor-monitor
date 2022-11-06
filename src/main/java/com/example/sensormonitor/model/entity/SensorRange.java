@@ -1,21 +1,31 @@
-package com.example.core.entity;
+package com.example.sensormonitor.model.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "ranges")
 public class SensorRange extends BaseEntity {
     private int rangeFrom;
     private int rangeTo;
+    @OneToMany(mappedBy = "sensorRange")
+    @JsonIgnore
+    private Set<Sensor> sensors;
 
     public SensorRange(int rangeFrom, int rangeTo) {
+        sensors = new HashSet<>();
         this.rangeFrom = rangeFrom;
         this.rangeTo = rangeTo;
     }
 
     public SensorRange() {
+        sensors = new HashSet<>();
     }
 
     public int getRangeFrom() {
@@ -32,6 +42,15 @@ public class SensorRange extends BaseEntity {
 
     public void setRangeTo(int rangeTo) {
         this.rangeTo = rangeTo;
+    }
+
+
+    public Set<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(Set<Sensor> sensors) {
+        this.sensors = sensors;
     }
 
     @Override

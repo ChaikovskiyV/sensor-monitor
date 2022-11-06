@@ -1,6 +1,8 @@
-package com.example.core.dto;
+package com.example.sensormonitor.model.dto;
 
-import com.example.core.entity.SensorRange;
+import com.example.sensormonitor.model.entity.Sensor;
+import com.example.sensormonitor.model.entity.SensorType;
+import com.example.sensormonitor.model.entity.SensorUnit;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -8,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.example.core.entity.Sensor} entity
+ * A DTO for the {@link Sensor} entity
  */
 public class SensorDto implements Serializable {
     @NotEmpty(message = "A name can't be empty.")
@@ -20,29 +22,12 @@ public class SensorDto implements Serializable {
     @NotEmpty(message = "A model can't be empty.")
     @Length(max = 15, message = "A model length has to be not longer than 15 characters.")
     private String model;
-    private SensorRange sensorRange;
-    private String sensorType;
-    private String unitType;
+    private int rangeFrom;
+    private int rangeTo;
+    private transient SensorType sensorType;
+    private transient SensorUnit sensorUnit;
     @Length(max = 40, message = "A location length has to be not longer than 40 characters.")
     private String location;
-
-    public SensorDto() {
-    }
-
-    public SensorDto(String name,
-                     String description,
-                     String model,
-                     SensorRange sensorRange, String sensorType,
-                     String unitType,
-                     String location) {
-        this.name = name;
-        this.description = description;
-        this.model = model;
-        this.sensorRange = sensorRange;
-        this.sensorType = sensorType;
-        this.unitType = unitType;
-        this.location = location;
-    }
 
     public String getName() {
         return name;
@@ -56,20 +41,24 @@ public class SensorDto implements Serializable {
         return model;
     }
 
-    public SensorRange getSensorRange() {
-        return sensorRange;
+    public int getRangeFrom() {
+        return rangeFrom;
     }
 
-    public void setSensorRange(SensorRange sensorRange) {
-        this.sensorRange = sensorRange;
+    public void setRangeFrom(int rangeFrom) {
+        this.rangeFrom = rangeFrom;
     }
 
-    public String getSensorType() {
+    public int getRangeTo() {
+        return rangeTo;
+    }
+
+    public SensorType getSensorType() {
         return sensorType;
     }
 
-    public String getUnitType() {
-        return unitType;
+    public SensorUnit getSensorUnit() {
+        return sensorUnit;
     }
 
     public String getLocation() {
@@ -80,19 +69,16 @@ public class SensorDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SensorDto entity = (SensorDto) o;
-        return Objects.equals(this.name, entity.name) &&
-                Objects.equals(this.description, entity.description) &&
-                Objects.equals(this.model, entity.model) &&
-                Objects.equals(this.sensorRange, entity.sensorRange) &&
-                Objects.equals(this.sensorType, entity.sensorType) &&
-                Objects.equals(this.unitType, entity.unitType) &&
-                Objects.equals(this.location, entity.location);
+        SensorDto sensorDto = (SensorDto) o;
+        return rangeFrom == sensorDto.rangeFrom && rangeTo == sensorDto.rangeTo &&
+                Objects.equals(name, sensorDto.name) && Objects.equals(description, sensorDto.description) &&
+                Objects.equals(model, sensorDto.model) && Objects.equals(sensorType, sensorDto.sensorType) &&
+                Objects.equals(sensorUnit, sensorDto.sensorUnit) && Objects.equals(location, sensorDto.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, model, sensorRange, sensorType, unitType, location);
+        return Objects.hash(name, description, model, rangeFrom, rangeTo, sensorType, sensorUnit, location);
     }
 
     @Override
@@ -104,12 +90,14 @@ public class SensorDto implements Serializable {
                 .append(description)
                 .append("', model='")
                 .append(model)
-                .append("', sensorRange=")
-                .append(sensorRange)
+                .append("', rangeFrom=")
+                .append(rangeFrom)
+                .append("', rangeTo=")
+                .append(rangeTo)
                 .append(", sensorType=")
                 .append(sensorType)
                 .append(", unitType=")
-                .append(unitType)
+                .append(sensorUnit)
                 .append(", location='")
                 .append(location)
                 .append("'}")

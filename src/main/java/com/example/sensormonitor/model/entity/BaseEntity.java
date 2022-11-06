@@ -1,4 +1,4 @@
-package com.example.core.entity;
+package com.example.sensormonitor.model.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

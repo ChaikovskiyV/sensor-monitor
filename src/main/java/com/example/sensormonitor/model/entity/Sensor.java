@@ -1,4 +1,4 @@
-package com.example.core.entity;
+package com.example.sensormonitor.model.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -14,7 +14,7 @@ public class Sensor extends BaseEntity {
     private String model;
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "range_id", nullable = false)
-    private SensorRange range;
+    private SensorRange sensorRange;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "type_id", nullable = false)
@@ -22,7 +22,7 @@ public class Sensor extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "unit_id", nullable = false)
-    private SensorUnit unit;
+    private SensorUnit sensorUnit;
     @Column(nullable = false)
     private String location;
 
@@ -33,9 +33,9 @@ public class Sensor extends BaseEntity {
         this.name = builder.name;
         this.description = builder.description;
         this.model = builder.model;
-        this.range = builder.range;
-        this.sensorType = builder.sensorType;
-        this.unit = builder.unit;
+        this.sensorRange = builder.range;
+        this.sensorType = builder.type;
+        this.sensorUnit = builder.unit;
         this.location = builder.location;
     }
 
@@ -67,12 +67,12 @@ public class Sensor extends BaseEntity {
         this.model = model;
     }
 
-    public SensorRange getRange() {
-        return range;
+    public SensorRange getSensorRange() {
+        return sensorRange;
     }
 
-    public void setRange(SensorRange range) {
-        this.range = range;
+    public void setSensorRange(SensorRange range) {
+        this.sensorRange = range;
     }
 
     public SensorType getSensorType() {
@@ -83,12 +83,12 @@ public class Sensor extends BaseEntity {
         this.sensorType = sensorType;
     }
 
-    public SensorUnit getUnit() {
-        return unit;
+    public SensorUnit getSensorUnit() {
+        return sensorUnit;
     }
 
-    public void setUnit(SensorUnit unit) {
-        this.unit = unit;
+    public void setSensorUnit(SensorUnit unit) {
+        this.sensorUnit = unit;
     }
 
     public String getLocation() {
@@ -104,12 +104,12 @@ public class Sensor extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sensor sensor = (Sensor) o;
-        return Objects.equals(name, sensor.name) && Objects.equals(description, sensor.description) && Objects.equals(model, sensor.model) && Objects.equals(range, sensor.range) && Objects.equals(sensorType, sensor.sensorType) && Objects.equals(unit, sensor.unit) && Objects.equals(location, sensor.location);
+        return Objects.equals(name, sensor.name) && Objects.equals(description, sensor.description) && Objects.equals(model, sensor.model) && Objects.equals(sensorRange, sensor.sensorRange) && Objects.equals(sensorType, sensor.sensorType) && Objects.equals(sensorUnit, sensor.sensorUnit) && Objects.equals(location, sensor.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, model, range, sensorType, unit, location);
+        return Objects.hash(name, description, model, sensorRange, sensorType, sensorUnit, location);
     }
 
     @Override
@@ -122,11 +122,11 @@ public class Sensor extends BaseEntity {
                 .append("', model='")
                 .append(model)
                 .append("', range=")
-                .append(range)
-                .append(", sensorType=")
+                .append(sensorRange)
+                .append(", type=")
                 .append(sensorType)
                 .append(", unit=")
-                .append(unit)
+                .append(sensorUnit)
                 .append(", location='")
                 .append(location)
                 .append("'}")
@@ -138,7 +138,7 @@ public class Sensor extends BaseEntity {
         private String description;
         private String model;
         private SensorRange range;
-        private SensorType sensorType;
+        private SensorType type;
         private SensorUnit unit;
         private String location;
 
@@ -169,8 +169,8 @@ public class Sensor extends BaseEntity {
             return this;
         }
 
-        public SensorBuilder setSensorType(SensorType sensorType) {
-            this.sensorType = sensorType;
+        public SensorBuilder setType(SensorType type) {
+            this.type = type;
 
             return this;
         }
