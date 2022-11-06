@@ -2,6 +2,7 @@ Web application Sensor Monitor
 
 This application works with sensors data. It allows to add new sensors with following information:
 - name;
+- description;
 - model;
 - type;
 - range;
