@@ -5,7 +5,7 @@ package com.example.sensormonitor.model.dao;
  */
 public final class DatabaseQueries {
     public static final String FIND_COUNT = "SELECT count(*) ";
-    public static final String FIND_USER_BY_EMAIL = "FROM User WHERE email=?1";
+    public static final String FIND_USER_BY_USERNAME = "FROM User WHERE username=?1";
 
     public static final String FIND_ALL_SENSORS = "FROM Sensor";
     public static final String FIND_SENSOR_BY_PART_OF_DATA = "FROM Sensor s WHERE " +

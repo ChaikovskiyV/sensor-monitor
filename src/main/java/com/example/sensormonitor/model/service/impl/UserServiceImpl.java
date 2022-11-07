@@ -26,17 +26,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
+    public User findUserByUsername(String username) {
         List<User> users;
-        if (email == null || email.isBlank()) {
-            throw new ApplicationNotValidDataException(EMPTY_EMAIL, email);
+        if (username == null || username.isBlank()) {
+            throw new ApplicationNotValidDataException(EMPTY_EMAIL, username);
         }
 
-        users = userDao.findUserByEmail(email);
+        users = userDao.findUserByUsername(username);
 
         if (users.isEmpty()) {
-            logger.error(() -> String.format(NOT_FOUND_USER_BY_NAME, email));
-            throw new ApplicationNotFoundException(NOT_FOUND_USER_BY_NAME, email);
+            logger.error(() -> String.format(NOT_FOUND_USER_BY_NAME, username));
+            throw new ApplicationNotFoundException(NOT_FOUND_USER_BY_NAME, username);
         }
 
         return users.get(0);

@@ -5,5 +5,5 @@ import com.example.sensormonitor.model.entity.User;
 import java.util.List;
 
 public interface UserDao {
-    List<User> findUserByEmail(String email);
+    List<User> findUserByUsername(String username);
 }

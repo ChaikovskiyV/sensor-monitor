@@ -139,7 +139,7 @@ public class SensorServiceImpl implements SensorService {
         return wrongPaginationParams;
     }
 
-    private Sensor replaceExistChild(Sensor sensor) {
+    private void replaceExistChild(Sensor sensor) {
         Optional<SensorUnit> unitOptional = findTheSameUnit(sensor.getSensorUnit());
         Optional<SensorType> typeOptional = findTheSameType(sensor.getSensorType());
         Optional<SensorRange> rangeOptional = findTheSameRange(sensor.getSensorRange());
@@ -147,8 +147,6 @@ public class SensorServiceImpl implements SensorService {
         unitOptional.ifPresent(sensor::setSensorUnit);
         typeOptional.ifPresent(sensor::setSensorType);
         rangeOptional.ifPresent(sensor :: setSensorRange);
-
-        return sensor;
     }
 
     private Optional<SensorUnit> findTheSameUnit(SensorUnit unit) {

@@ -28,7 +28,7 @@ public class SensorController {
     private SensorService sensorService;
 
     @GetMapping(value = "/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_VIEWER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_VIEWER')")
     public HttpEntity<Sensor> findSensorById(@PathVariable(name = "id") long id) {
         Sensor sensor = sensorService.findById(id);
 
@@ -36,7 +36,7 @@ public class SensorController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_VIEWER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_VIEWER')")
     public HttpEntity<PageDto> findSensors(@RequestParam(name = "search", required = false) String search,
                                            @RequestParam(name = "page", required = false) Integer page,
                                            @RequestParam(name = "limit", required = false) Integer limit) {
@@ -52,7 +52,7 @@ public class SensorController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR')")
     public HttpEntity<Sensor> saveNewSensor(@Valid @RequestBody SensorDto sensorDto, BindingResult bindingResult) {
 
         if (sensorDto.getRangeFrom() >= sensorDto.getRangeTo()) {
@@ -69,7 +69,7 @@ public class SensorController {
     }
 
     @PutMapping(value = "/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR')")
     public HttpEntity<Sensor> updateSensor(@PathVariable(name = "id") long id,
                                            @Valid @RequestBody SensorDto sensorDto, BindingResult bindingResult) {
 
@@ -87,7 +87,7 @@ public class SensorController {
     }
 
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSensor(@PathVariable(name = "id") long id) {
         sensorService.delete(id);

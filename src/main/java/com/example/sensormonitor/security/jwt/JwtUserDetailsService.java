@@ -17,16 +17,13 @@ public class JwtUserDetailsService implements UserDetailsService {
         this.userService = userService;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findUserByEmail(username);
+        User user = userService.findUserByUsername(username);
 
         return new JwtUserDetails(
                 user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getRole());
     }

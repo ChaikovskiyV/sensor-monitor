@@ -9,12 +9,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-    @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String lastName;
     @Column(unique = true, nullable = false)
-    private String email;
+    private String username;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private UserRole role;
@@ -22,10 +18,8 @@ public class User extends BaseEntity {
     @JsonIgnore
     private String password;
 
-    public User(String firstName, String lastName, String email, UserRole role, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public User(String username, UserRole role, String password) {
+        this.username = username;
         this.role = role;
         this.password = password;
     }
@@ -33,28 +27,12 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String email) {
+        this.username = email;
     }
 
     public UserRole getRole() {
@@ -78,25 +56,21 @@ public class User extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email) && role == user.role && Objects.equals(password, user.password);
+        return Objects.equals(username, user.username) && role == user.role &&
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, role, password);
+        return Objects.hash(username, role, password);
     }
 
     @Override
     public String toString() {
         return new StringBuilder("User{")
                 .append(super.toString())
-                .append("firstName='")
-                .append(firstName)
-                .append("', lastName='")
-                .append(lastName)
-                .append("', email='")
-                .append(email)
+                .append(", username='")
+                .append(username)
                 .append(", role=")
                 .append(role)
                 .append('}')
