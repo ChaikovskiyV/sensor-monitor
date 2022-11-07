@@ -42,6 +42,7 @@ public class SensorDaoImpl implements SensorDao {
                 .getResultList();
 
         pageDto.setPagesNumber(getPagesNumber(pageDto.getLimit(), rowsCount));
+        pageDto.setResultsNumber(rowsCount);
         pageDto.setSensors(sensors);
 
         return pageDto;
@@ -58,6 +59,7 @@ public class SensorDaoImpl implements SensorDao {
                 .getResultList();
 
         pageDto.setPagesNumber(getPagesNumber(pageDto.getLimit(), rowsCount));
+        pageDto.setResultsNumber(rowsCount);
         pageDto.setSensors(sensors);
 
         return pageDto;

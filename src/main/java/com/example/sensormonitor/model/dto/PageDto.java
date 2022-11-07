@@ -8,8 +8,8 @@ public class PageDto {
     private int limit;
     private int currentPage;
     private long pagesNumber;
+    private long resultsNumber;
     private int startWithPosition;
-
     private List<Sensor> sensors;
 
     public PageDto(int limit, int currentPage) {
@@ -31,6 +31,14 @@ public class PageDto {
 
     public void setPagesNumber(long pagesNumber) {
         this.pagesNumber = pagesNumber;
+    }
+
+    public long getResultsNumber() {
+        return resultsNumber;
+    }
+
+    public void setResultsNumber(long resultsNumber) {
+        this.resultsNumber = resultsNumber;
     }
 
     public int getStartWithPosition() {
