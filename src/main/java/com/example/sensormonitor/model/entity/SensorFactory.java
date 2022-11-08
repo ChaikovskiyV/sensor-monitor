@@ -13,7 +13,7 @@ public class SensorFactory {
                 .setModel(sensorDto.getModel())
                 .setType(sensorDto.getSensorType())
                 .setUnit(sensorDto.getSensorUnit())
-                .setRange(new SensorRange(sensorDto.getRangeFrom(), sensorDto.getRangeTo()))
+                .setRange(sensorDto.getSensorRange())
                 .setDescription(sensorDto.getDescription())
                 .setLocation(sensorDto.getLocation())
                 .build();

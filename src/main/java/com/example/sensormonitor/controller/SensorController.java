@@ -55,7 +55,7 @@ public class SensorController {
     @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR')")
     public HttpEntity<Sensor> saveNewSensor(@Valid @RequestBody SensorDto sensorDto, BindingResult bindingResult) {
 
-        if (sensorDto.getRangeFrom() >= sensorDto.getRangeTo()) {
+        if (sensorDto.getSensorRange().getRangeFrom() >= sensorDto.getSensorRange().getRangeTo()) {
             addRangeErrorToBindingResult(bindingResult);
         }
 
@@ -73,7 +73,7 @@ public class SensorController {
     public HttpEntity<Sensor> updateSensor(@PathVariable(name = "id") long id,
                                            @Valid @RequestBody SensorDto sensorDto, BindingResult bindingResult) {
 
-        if (sensorDto.getRangeFrom() >= sensorDto.getRangeTo()) {
+        if (sensorDto.getSensorRange().getRangeFrom() >= sensorDto.getSensorRange().getRangeTo()) {
             addRangeErrorToBindingResult(bindingResult);
         }
 

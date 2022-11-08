@@ -1,6 +1,7 @@
 package com.example.sensormonitor.model.dto;
 
 import com.example.sensormonitor.model.entity.Sensor;
+import com.example.sensormonitor.model.entity.SensorRange;
 import com.example.sensormonitor.model.entity.SensorType;
 import com.example.sensormonitor.model.entity.SensorUnit;
 import org.hibernate.validator.constraints.Length;
@@ -22,8 +23,7 @@ public class SensorDto implements Serializable {
     @NotEmpty(message = "A model can't be empty.")
     @Length(max = 15, message = "A model length has to be not longer than 15 characters.")
     private String model;
-    private int rangeFrom;
-    private int rangeTo;
+    private transient SensorRange sensorRange;
     private transient SensorType sensorType;
     private transient SensorUnit sensorUnit;
     @Length(max = 40, message = "A location length has to be not longer than 40 characters.")
@@ -41,16 +41,8 @@ public class SensorDto implements Serializable {
         return model;
     }
 
-    public int getRangeFrom() {
-        return rangeFrom;
-    }
-
-    public void setRangeFrom(int rangeFrom) {
-        this.rangeFrom = rangeFrom;
-    }
-
-    public int getRangeTo() {
-        return rangeTo;
+    public SensorRange getSensorRange() {
+        return sensorRange;
     }
 
     public SensorType getSensorType() {
@@ -70,15 +62,15 @@ public class SensorDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SensorDto sensorDto = (SensorDto) o;
-        return rangeFrom == sensorDto.rangeFrom && rangeTo == sensorDto.rangeTo &&
-                Objects.equals(name, sensorDto.name) && Objects.equals(description, sensorDto.description) &&
-                Objects.equals(model, sensorDto.model) && Objects.equals(sensorType, sensorDto.sensorType) &&
-                Objects.equals(sensorUnit, sensorDto.sensorUnit) && Objects.equals(location, sensorDto.location);
+        return Objects.equals(name, sensorDto.name) && Objects.equals(description, sensorDto.description) &&
+                Objects.equals(model, sensorDto.model) && Objects.equals(sensorRange, sensorDto.sensorRange) &&
+                Objects.equals(sensorType, sensorDto.sensorType) && Objects.equals(sensorUnit, sensorDto.sensorUnit) &&
+                Objects.equals(location, sensorDto.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, model, rangeFrom, rangeTo, sensorType, sensorUnit, location);
+        return Objects.hash(name, description, model, sensorRange, sensorType, sensorUnit, location);
     }
 
     @Override
@@ -90,10 +82,8 @@ public class SensorDto implements Serializable {
                 .append(description)
                 .append("', model='")
                 .append(model)
-                .append("', rangeFrom=")
-                .append(rangeFrom)
-                .append("', rangeTo=")
-                .append(rangeTo)
+                .append("', sensorRange=")
+                .append(sensorRange)
                 .append(", sensorType=")
                 .append(sensorType)
                 .append(", unitType=")
