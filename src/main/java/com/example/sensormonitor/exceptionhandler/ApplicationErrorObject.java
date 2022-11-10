@@ -1,4 +1,4 @@
-package com.example.sensormonitor.security.exceptionhandler;
+package com.example.sensormonitor.exceptionhandler;
 
 public class ApplicationErrorObject {
     private int errorCode;

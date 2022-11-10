@@ -1,4 +1,4 @@
-package com.example.sensormonitor.security.exceptionhandler;
+package com.example.sensormonitor.exceptionhandler;
 
 import com.example.sensormonitor.exception.ApplicationDuplicateException;
 import com.example.sensormonitor.exception.ApplicationNotFoundException;
