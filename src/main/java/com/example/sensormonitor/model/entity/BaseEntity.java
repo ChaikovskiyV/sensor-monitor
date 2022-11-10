@@ -1,14 +1,12 @@
 package com.example.sensormonitor.model.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "id_generator", initialValue = 11)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_generator")
     private long id;
 
     public long getId() {
