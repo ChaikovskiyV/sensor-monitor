@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Sensor extends BaseEntity {
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String description;
     @Column(nullable = false)
     private String model;
@@ -23,7 +22,6 @@ public class Sensor extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "unit_id", nullable = false)
     private SensorUnit sensorUnit;
-    @Column(nullable = false)
     private String location;
 
     public Sensor() {
