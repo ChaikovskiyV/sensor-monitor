@@ -1,8 +1,8 @@
 Rest api Sensor Monitor
 
-This web service is created using Java, Spring Framework(Boot, Data, Security), Hibernate, PostgreSQL and REST api.  
+This rest api is created using Java, Spring Framework(Boot, Data, Security), Hibernate, PostgreSQL and REST api and  
 
-This rest api works with sensors data that includes following information:
+It works with sensors data that includes following information:
 
 - name;
 - description;
@@ -87,3 +87,43 @@ To run this rest api you need:
 - logins and passwords to authorize successfully:
   - a viewer: login 'user' and password 'password';
   - an administrator: login 'admin' and password 'password'.
+
+The api handles following endpoints(for localhost):
+
+- GET:
+  - http://localhost:8088/api/v1/sensors - get all sensors;
+  this request can be complemented by parameters:
+    - page - page number;
+    - limit - the items number on a single page;
+    - search - search by part of data;
+  - http://localhost:port/api/v1/sensor/id - get a sensor by id;
+
+- POST:
+  - http://localhost:8088/auth/login - login, a request body  should contain json like:
+    {
+    "username":"username",
+    "password":"password"
+    }
+  - http://localhost:8088/api/v1/sensors - add a new sensor, a request body should contain json like:
+    {
+    "name": "sensor name",
+    "description": "sensor description",
+    "model": "sensor model",
+    "sensorRange": {
+    "rangeFrom": number,
+    "rangeTo": number
+    },
+    "sensorType": {
+    "type": "sensor type"
+    },
+    "sensorUnit": {
+    "unit": "sensor unit"
+    },
+    "location": "sensor location"
+    }
+
+- PUT:
+http://localhost:8088/api/v1/sensors/id - update the sensor data with id, a request body should contain json as for the post method;
+
+- DELETE:
+http://localhost:8088/api/v1/sensors/id - delete the sensor with id.
