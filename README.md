@@ -1,6 +1,8 @@
-Web application Sensor Monitor
+Rest api Sensor Monitor
 
-This application works with sensors data. It allows to add new sensors with following information:
+This web service is created using Java, Spring Framework(Boot, Data, Security), Hibernate, PostgreSQL and REST api.  
+
+This rest api works with sensors data that includes following information:
 
 - name;
 - description;
@@ -9,6 +11,14 @@ This application works with sensors data. It allows to add new sensors with foll
 - range;
 - util;
 - location.
+
+The web service allows to do following operations:
+- login;
+- logout;
+- read sensors data;
+- add new sensors;
+- edit sensors;
+- delete sensors.
 
 The sensors data is available to authorised users only. To add a new sensor or update existing data the user must have
 the administrator role.
@@ -23,17 +33,11 @@ To run this rest api you need:
       username varchar(255) NOT NULL,
       CONSTRAINT uk_username UNIQUE (username),
       CONSTRAINT users_pkey PRIMARY KEY (id)
-      );
-    - INSERT INTO users
-      (id, username, "password", "role")
-      VALUES(1, '$2a$10$yV.1GkX3fBN2j1yKT/7cG.MGVnM63XFMoQ1RwJ4w.aKlH9/WBfo66', 'ADMINISTRATOR', 'admin');
-    - INSERT INTO users
-      (id, username, "password", "role")
-      VALUES(2, '$2a$10$yV.1GkX3fBN2j1yKT/7cG.MGVnM63XFMoQ1RwJ4w.aKlH9/WBfo66', 'VIEWER', 'user');
+      );    
     - CREATE TABLE sensors (
       id int8 NOT NULL,
-      description varchar(255) NOT NULL,
-      "location" varchar(50) NOT NULL,
+      description varchar(255) NULL,
+      "location" varchar(50) NULL,
       model varchar(25) NOT NULL,
       "name" varchar(40) NOT NULL,
       range_id int8 NOT NULL,
@@ -52,17 +56,24 @@ To run this rest api you need:
       "type" varchar(255) NOT NULL,
       CONSTRAINT types_pkey PRIMARY KEY (id),
       CONSTRAINT uk_type UNIQUE (type)
-      );
-    - INSERT INTO types(id, type) VALUES(3, 'Temperature');
-    - INSERT INTO types(id, type) VALUES(4, 'Pressure');
-    - INSERT INTO types(id, type) VALUES(5, 'Voltage');
-    - INSERT INTO types(id, type) VALUES(6, 'Humidity');
+      );    
     - CREATE TABLE units (
       id int8 NOT NULL,
       unit varchar(255) NOT NULL,
       CONSTRAINT uk_unit UNIQUE (unit),
       CONSTRAINT units_pkey PRIMARY KEY (id)
-      );
+      );    
+- run following scripts to get required data to database:
+    - INSERT INTO users
+      (id, username, "password", "role")
+      VALUES(1, '$2a$10$yV.1GkX3fBN2j1yKT/7cG.MGVnM63XFMoQ1RwJ4w.aKlH9/WBfo66', 'ADMINISTRATOR', 'admin');
+    - INSERT INTO users
+      (id, username, "password", "role")
+      VALUES(2, '$2a$10$yV.1GkX3fBN2j1yKT/7cG.MGVnM63XFMoQ1RwJ4w.aKlH9/WBfo66', 'VIEWER', 'user');
+    - INSERT INTO types(id, type) VALUES(3, 'Temperature');
+    - INSERT INTO types(id, type) VALUES(4, 'Pressure');
+    - INSERT INTO types(id, type) VALUES(5, 'Voltage');
+    - INSERT INTO types(id, type) VALUES(6, 'Humidity');
     - INSERT INTO units(id, unit) VALUES(7, '°C');
     - INSERT INTO units(id, unit) VALUES(8, 'bar');
     - INSERT INTO units(id, unit) VALUES(9, 'voltage');
