@@ -17,7 +17,6 @@ public class SensorDto implements Serializable {
     @NotEmpty(message = "A name can't be empty.")
     @Length(max = 30, message = "A name length has to be not longer than 30 characters.")
     private String name;
-    @NotEmpty(message = "A description can't be empty.")
     @Length(max = 200, message = "A description length has to be not longer than 200 characters.")
     private String description;
     @NotEmpty(message = "A model can't be empty.")
